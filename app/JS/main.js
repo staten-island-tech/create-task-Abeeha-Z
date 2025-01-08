@@ -1,7 +1,17 @@
 import "/CSS/style.css";
 const task_btn = document.getElementById("task_btn");
+const cat_btn = document.getElementById("cat_btn");
 const container = document.getElementById("task_container");
 const form = document.getElementById("form");
+
+const categories = []
+cat_btn.addEventListener("click", function() {
+    `
+    <label for="cat">New Category: </label>
+    <input id="cat"><br>`
+    const cat_name = document.getElementById("cat").value;
+    categories.append(cat_name);
+})
 
 task_btn.addEventListener("click", function () {
   const formHTML = `
@@ -53,7 +63,19 @@ function addTask() {
   );
 }
 
+//category btn --- add category to cat list --- change cat to be a dropdown when creating task
+
+
+
+
+
+
+
+
+
+
+
 //selection, iteration, sequencing, a list, one or more parameters in my procedures
 
-//procedures: order list from high to low priority, functions to remove and edit tasks, filtered view of tasks by category, and some type of visual chart.
+//procedures: functions to remove and edit tasks, filtered view of tasks by category, and some type of visual chart.
 //Framework: first perfect all the functions for a simple task list on a third fo the screen, then add the option for category tags and filtered view, and then visual view of completed/not completed tasks.
