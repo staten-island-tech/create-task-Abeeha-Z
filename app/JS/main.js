@@ -1,43 +1,59 @@
-import "/CSS/style.css"
+import "/CSS/style.css";
 const task_btn = document.getElementById("task_btn");
 const container = document.getElementById("task_container");
-const menu = document.getElementById("menu");
+const form = document.getElementById("form");
 
-task_btn.addEventListener("click", function() {
-    menu.innerHTML = 
-    `
-    <form>
+task_btn.addEventListener("click", function () {
+  const formHTML = `
+    <form class="task_form">
     <label for="name">Task: </label>
     <input id="name"><br>
     <label for="ddl">Deadline: </label>
     <input id="ddl"><br>
     <label for="priority">Priority(high/med/low): </label>
     <input id="priority"><br>
-    <button type="submit" id="submit_btn">Submit</button>
+    <label for="category">Category: </label>
+    <input id="category"><br>
+    <button type="submit" id="submit_btn">Submit</button><br>
+    <button id="done_btn">Done</button>
     </form>    
-    `
-    const submit_btn = document.getElementById("submit_btn")
+    `;
 
-    submit_btn.addEventListener("submit", function() {
-        addTask();
-    });
+  form.insertAdjacentHTML("beforeend", formHTML);
 
-    });
+  const submit_btn = document.getElementById("submit_btn");
+  const done_btn = document.getElementById("done_btn");
+
+  submit_btn.addEventListener("click", function (event) {
+    event.preventDefault();
+    addTask();
+  });
+
+  done_btn.addEventListener("click", function () {
+    form.innerHTML = "";
+  });
+});
 
 function addTask() {
-    const task_name = document.getElementById("name").value
-    const deadline = document.getElementById("ddl").value
-    const priority = document.getElementById("priority").value
+  const task_name = document.getElementById("name").value;
+  const deadline = document.getElementById("ddl").value;
+  const priority = document.getElementById("priority").value;
+  const category = document.getElementById("category").value;
 
-    container.insertAdjacentHTML("beforeend", `
-    <div>
-    <p>${task_name}, due ${deadline}, priority: ${priority}</p>
-  </div>
-        `)
+  container.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class= list_item>
+    <input type="checkbox" id="task" unchecked />
+    <label for="task">${task_name}, due ${deadline}<br>
+    Priority: ${priority}<br>
+    Category: ${category}<br></label>
+    </div>
+        `
+  );
 }
 
-//    <input type="checkbox" id="task" checked />
-//<label for="task">${task_name}, due ${deadline}, priority: ${priority}</label>
-// eventlis for taskbtn --- show form -- event listener for form submission --- run addTask()
+//selection, iteration, sequencing, a list, one or more parameters in my procedures
 
-
+//procedures: order list from high to low priority, functions to remove and edit tasks, filtered view of tasks by category, and some type of visual chart.
+//Framework: first perfect all the functions for a simple task list on a third fo the screen, then add the option for category tags and filtered view, and then visual view of completed/not completed tasks.
