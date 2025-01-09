@@ -4,11 +4,19 @@ const cat_btn = document.getElementById("cat_btn");
 const container = document.getElementById("task_container");
 const form = document.getElementById("form");
 
+//dropdown for filter
+
+function filter_view {
+  
+}
+
+
+
 let categories = [];
 
 cat_btn.addEventListener("click", function (event) {
   const cat_form = `
-    <form>
+    <form class="task_form">
     <label for="cat">New Category: </label>
     <input id="cat"><br>
     <button type="submit" id="cat-submit">Submit</button>
