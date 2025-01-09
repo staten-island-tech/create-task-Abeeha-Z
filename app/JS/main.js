@@ -4,14 +4,39 @@ const cat_btn = document.getElementById("cat_btn");
 const container = document.getElementById("task_container");
 const form = document.getElementById("form");
 
-const categories = []
-cat_btn.addEventListener("click", function() {
-    `
+let categories = [];
+
+cat_btn.addEventListener("click", function (event) {
+  const cat_form = `
+    <form>
     <label for="cat">New Category: </label>
-    <input id="cat"><br>`
+    <input id="cat"><br>
+    <button type="submit" id="cat-submit">Submit</button>
+    </form>`;
+  form.insertAdjacentHTML("beforeend", cat_form);
+
+  const catsubmitbtn = document.getElementById("cat-submit");
+  catsubmitbtn.addEventListener("click", function (event) {
+    event.preventDefault();
     const cat_name = document.getElementById("cat").value;
-    categories.append(cat_name);
-})
+    categories.push(cat_name);
+    console.log(categories);
+    update_categories();
+  });
+});
+//cat btn click -- input form for name--store in object -- run fucntion to update cats --- formHTML += new option --edit list and rerun function every time the add category button is clicked
+
+function update_categories() {
+  const catselect = document.getElementById("cat-select");
+  catselect.innerHTML = `<option>Select A Category</option>`;
+  categories.forEach((category) =>
+    catselect.insertAdjacentHTML(
+      "beforeend",
+      `
+    <option>${category}</option>`
+    )
+  );
+}
 
 task_btn.addEventListener("click", function () {
   const formHTML = `
@@ -22,14 +47,17 @@ task_btn.addEventListener("click", function () {
     <input id="ddl"><br>
     <label for="priority">Priority(high/med/low): </label>
     <input id="priority"><br>
-    <label for="category">Category: </label>
-    <input id="category"><br>
-    <button type="submit" id="submit_btn">Submit</button><br>
-    <button id="done_btn">Done</button>
+    <select id="cat-select">
+    <option>Select A Category</option>
+    </select>
+    <button type="submit" id="submit_btn">Submit</button>
+    <button id="done_btn">Done</button><br>
     </form>    
     `;
 
   form.insertAdjacentHTML("beforeend", formHTML);
+
+  update_categories();
 
   const submit_btn = document.getElementById("submit_btn");
   const done_btn = document.getElementById("done_btn");
@@ -48,7 +76,7 @@ function addTask() {
   const task_name = document.getElementById("name").value;
   const deadline = document.getElementById("ddl").value;
   const priority = document.getElementById("priority").value;
-  const category = document.getElementById("category").value;
+  const category = document.getElementById("cat-select").value;
 
   container.insertAdjacentHTML(
     "beforeend",
@@ -62,18 +90,6 @@ function addTask() {
         `
   );
 }
-
-//category btn --- add category to cat list --- change cat to be a dropdown when creating task
-
-
-
-
-
-
-
-
-
-
 
 //selection, iteration, sequencing, a list, one or more parameters in my procedures
 
