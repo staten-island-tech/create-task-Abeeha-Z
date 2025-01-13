@@ -3,23 +3,18 @@ const task_btn = document.getElementById("task_btn");
 const cat_btn = document.getElementById("cat_btn");
 const container = document.getElementById("task_container");
 const form = document.getElementById("form");
-
-//dropdown for filter
-
-function filter_view {
-  
-}
-
-
+const filter_btn = document.getElementById("filter_btn");
 
 let categories = [];
+let tasks = [];
 
 cat_btn.addEventListener("click", function (event) {
   const cat_form = `
     <form class="task_form">
     <label for="cat">New Category: </label>
     <input id="cat"><br>
-    <button type="submit" id="cat-submit">Submit</button>
+    <button type="submit" id="cat-submit" class="m-4 border-2 border-gray-500 p-2 rounded">Submit</button>
+    <button id="cat-done" class="m-4 border-2 border-gray-500 p-2 rounded">Done</button><br>
     </form>`;
   form.insertAdjacentHTML("beforeend", cat_form);
 
@@ -31,35 +26,42 @@ cat_btn.addEventListener("click", function (event) {
     console.log(categories);
     update_categories();
   });
+  const catdone_btn = document.getElementById("cat-done");
+  catdone_btn.addEventListener("click", function () {
+    const formElements = form.querySelectorAll(".task_form");
+    formElements.forEach((element) => element.remove());
+  });
 });
-//cat btn click -- input form for name--store in object -- run fucntion to update cats --- formHTML += new option --edit list and rerun function every time the add category button is clicked
 
 function update_categories() {
+  const filter_select = document.getElementById("view_sort");
   const catselect = document.getElementById("cat-select");
+
   catselect.innerHTML = `<option>Select A Category</option>`;
-  categories.forEach((category) =>
-    catselect.insertAdjacentHTML(
+  filter_select.innerHTML = "<option>Filter by Category</option>";
+  categories.forEach((category) => {
+    catselect.insertAdjacentHTML("beforeend", `<option>${category}</option>`);
+    filter_select.insertAdjacentHTML(
       "beforeend",
-      `
-    <option>${category}</option>`
-    )
-  );
+      `<option>${category}</option>`
+    );
+  });
 }
 
 task_btn.addEventListener("click", function () {
   const formHTML = `
     <form class="task_form">
-    <label for="name">Task: </label>
-    <input id="name"><br>
-    <label for="ddl">Deadline: </label>
-    <input id="ddl"><br>
-    <label for="priority">Priority(high/med/low): </label>
-    <input id="priority"><br>
-    <select id="cat-select">
+    <label for="name">Task: </label><br>
+    <input id="name">
+    <label for="ddl">Deadline: </label><br>
+    <input id="ddl">
+    <label for="priority">Priority(h/m/l): </label><br>
+    <input id="priority">
+    <select id="cat-select"> 
     <option>Select A Category</option>
-    </select>
-    <button type="submit" id="submit_btn">Submit</button>
-    <button id="done_btn">Done</button><br>
+    </select><br>
+    <button type="submit" class="m-4 border-2 border-gray-500 p-2 rounded" id="submit_btn">Submit</button>
+    <button id="done_btn" class="m-4 border-2 border-gray-500 p-2 rounded">Done</button><br>
     </form>    
     `;
 
@@ -86,20 +88,59 @@ function addTask() {
   const priority = document.getElementById("priority").value;
   const category = document.getElementById("cat-select").value;
 
+  const task = {
+    task_name,
+    deadline,
+    priority,
+    category,
+  };
+
+  tasks.push(task);
+  console.log(tasks);
+  insert_task(task);
+}
+
+function insert_task(task) {
   container.insertAdjacentHTML(
     "beforeend",
     `
-    <div class= list_item>
-    <input type="checkbox" id="task" unchecked />
-    <label for="task">${task_name}, due ${deadline}<br>
-    Priority: ${priority}<br>
-    Category: ${category}<br></label>
-    </div>
-        `
+      <div class="list_item">
+        <input type="checkbox" id="task" unchecked />
+        <label for="task">${task.task_name}, due ${task.deadline}<br>
+        Priority: ${task.priority}<br>
+        Category: ${task.category}<br></label>
+      </div>
+      `
   );
 }
+
+function displaytasks() {
+  container.innerHTML = "";
+  const selectedCategory = document.getElementById("view_sort").value;
+
+  if (selectedCategory === "Filter by Category") {
+    tasks.forEach((task) => {
+      insert_task();
+    });
+  } else {
+    tasks.forEach((task) => {
+      if (task.category === selectedCategory) {
+        insert_task(task);
+      }
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  filter_btn.addEventListener("click", function () {
+    displaytasks();
+  });
+});
+
+//view_sort.value is coming up as null when we click go to activate displaytasks(), and the filter dropdown resets after you click done and clear the forms
 
 //selection, iteration, sequencing, a list, one or more parameters in my procedures
 
 //procedures: functions to remove and edit tasks, filtered view of tasks by category, and some type of visual chart.
-//Framework: first perfect all the functions for a simple task list on a third fo the screen, then add the option for category tags and filtered view, and then visual view of completed/not completed tasks.
+//Framework: first perfect all the functions for a simple task list on a third fo the screen, then add the option for category tags and filtered view, and then
+// visual view of completed/not completed tasks
