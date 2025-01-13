@@ -12,19 +12,20 @@
   <div class="display">
     <div id="menu">
       <div class="w-full h-6">MENU OPTIONS</div>
-      <button class= "btn" id="task_btn">Add Task</button><br>
-      <button class= "btn" id="cat_btn">Add Category</button>
+      <button class="btn" id="task_btn">Add Task</button><br>
+      <button class="btn" id="cat_btn">Add Category</button>
       <div id="form">
       </div>
     </div>
     <div id="task_container">
       <div class="w-full h-6">
         <p class="justify-self-start">TASK LIST</p>
-      <select id="view_sort" class="justify-self-end" >
-        <option>Filter by Category</option>
-      </select>
-      <button id="filter_btn">Go</button>
+        <select id="view_sort" class="justify-self-end">
+          <option>Filter by Category</option>
+        </select>
+        <button id="filter_btn">Go</button>
       </div>
+      <div class="m-2" id="task-list-container"></div>
     </div>
 
     <script type="module" src="./JS/main.js">

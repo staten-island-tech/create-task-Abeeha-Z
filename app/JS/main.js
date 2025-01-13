@@ -1,14 +1,14 @@
 import "/CSS/style.css";
 const task_btn = document.getElementById("task_btn");
 const cat_btn = document.getElementById("cat_btn");
-const container = document.getElementById("task_container");
 const form = document.getElementById("form");
 const filter_btn = document.getElementById("filter_btn");
+const task_list = document.getElementById("task-list-container");
 
 let categories = [];
 let tasks = [];
 
-cat_btn.addEventListener("click", function (event) {
+cat_btn.addEventListener("click", function () {
   const cat_form = `
     <form class="task_form">
     <label for="cat">New Category: </label>
@@ -23,7 +23,6 @@ cat_btn.addEventListener("click", function (event) {
     event.preventDefault();
     const cat_name = document.getElementById("cat").value;
     categories.push(cat_name);
-    console.log(categories);
     update_categories();
   });
   const catdone_btn = document.getElementById("cat-done");
@@ -101,7 +100,7 @@ function addTask() {
 }
 
 function insert_task(task) {
-  container.insertAdjacentHTML(
+  task_list.insertAdjacentHTML(
     "beforeend",
     `
       <div class="list_item">
@@ -114,8 +113,8 @@ function insert_task(task) {
   );
 }
 
-function displaytasks() {
-  container.innerHTML = "";
+function displaytasks(tasks) {
+  task_list.innerHTML = "";
   const selectedCategory = document.getElementById("view_sort").value;
 
   if (selectedCategory === "Filter by Category") {

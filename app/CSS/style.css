@@ -5,8 +5,9 @@
 .display {
   @apply flex flex-wrap
 }
+
 .task_form {
-    @apply bg-gray-100 p-4 m-4 w-60 h-auto p-4 border-2 border-gray-500 rounded-xl text-left space-y-3
+  @apply bg-gray-100 p-4 m-4 w-60 h-auto border-2 border-gray-500 rounded-xl text-left space-y-3
 }
 
 
@@ -23,7 +24,11 @@
 }
 
 #task_container {
-  @apply w-[50vw] min-h-32 border-gray-500 border-2 rounded-lg m-3 p-3 justify-center flex flex-wrap
+  @apply w-[50vw] min-h-32 border-gray-500 border-2 rounded-lg m-4 p-3 justify-center flex flex-wrap
+}
+
+#task-list-container {
+  @apply m-4 p-3 justify-center flex flex-wrap
 }
 
 .list_item {
