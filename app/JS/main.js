@@ -135,11 +135,3 @@ document.addEventListener("DOMContentLoaded", function () {
     displaytasks(tasks);
   });
 });
-
-//view_sort.value is coming up as null when we click go to activate displaytasks(), and the filter dropdown resets after you click done and clear the forms
-
-//selection, iteration, sequencing, a list, one or more parameters in my procedures
-
-//procedures: functions to remove and edit tasks, filtered view of tasks by category, and some type of visual chart.
-//Framework: first perfect all the functions for a simple task list on a third fo the screen, then add the option for category tags and filtered view, and then
-// visual view of completed/not completed tasks
