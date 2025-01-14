@@ -16,7 +16,7 @@
 }
 
 #menu {
-  @apply min-h-32 w-[30vw] border-gray-500 border-2 rounded-lg m-3 p-3 flex flex-wrap
+  @apply min-h-32 w-[47vw] border-gray-500 border-2 rounded-lg m-3 p-3 flex flex-wrap
 }
 
 .btn {
@@ -24,7 +24,7 @@
 }
 
 #task_container {
-  @apply w-[50vw] min-h-32 border-gray-500 border-2 rounded-lg m-4 p-3 justify-center flex flex-wrap
+  @apply w-[47vw] min-h-32 border-gray-500 border-2 rounded-lg m-4 p-3 justify-center flex flex-wrap
 }
 
 #task-list-container {

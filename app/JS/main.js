@@ -119,7 +119,7 @@ function displaytasks(tasks) {
 
   if (selectedCategory === "Filter by Category") {
     tasks.forEach((task) => {
-      insert_task();
+      insert_task(task);
     });
   } else {
     tasks.forEach((task) => {
@@ -132,7 +132,7 @@ function displaytasks(tasks) {
 
 document.addEventListener("DOMContentLoaded", function () {
   filter_btn.addEventListener("click", function () {
-    displaytasks();
+    displaytasks(tasks);
   });
 });
 
